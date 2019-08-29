@@ -6,7 +6,7 @@
 ## 	and scans through their tiers to generate textgrids that only have
 ## 	the phone and word tiers corresponding to the speaker in the file name.
 ## 	The program assumes that files follow the following labeling format:
-##			LOCATION_FIRSTNAME_LASTNAME.TextGrid
+##			Location_Firstname_Lastname.TextGrid
 ## 		It also assumes that for each speaker, there are only phone and word 
 ## 	tiers. The program checks for the most common labeling methods in order to 
 ##	identify the target speaker: 
