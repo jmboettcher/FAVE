@@ -1,0 +1,109 @@
+#!/usr/bin/expect -f
+
+##
+## 	This expect script makes it easier to queue speakers 
+## to extract formants from by allowing you to preemptively 
+## provide demographic info. This particular version only
+## fills in the name, sex, and location fields. It leaves 
+## the other fields blank. 
+##
+## 	This version also assumes that your input files 
+## follow the following formats:
+##		location_lastName_firstName.wav
+##		location_lastName_firstName.TextGrid
+##
+## 	And that you want your output file to follow the 
+## following format:
+## 		location_lastName_firstName_formants
+##
+
+set timeout -1
+
+
+ # Reads tab-separated file with list of queued speakers
+ # and the following fields: firstName lastName sex location
+
+set f [open "queue.txt"]
+set persons [split [read $f] "\n"]
+close $f
+
+
+ # Creates file for list of speakers not extracted
+
+set redo [open "redo.txt" w]
+puts $redo "The following speakers were not able to be extracted:\n"
+close $redo
+
+
+ # Uses data from info file to initiate extraction for each
+ # speaker and to respond to the demographic info input prompts 
+ # required for completing this extraction.
+
+foreach person $persons {
+	set info [split $person "\t"]
+	lassign $info firstName lastName sex location
+
+	set wav "${location}_${lastName}_${firstName}.wav"
+	set TextGrid "${location}_${lastName}_${firstName}.TextGrid"
+	set output "${location}_${lastName}_${firstName}_formants"
+	set lastInitial [string index $lastName 0]
+
+
+	 # Ensures input files exist before running the program
+
+	if {[file exists $wav] && [file exists $TextGrid]} {
+		spawn python bin/extractFormants.py $wav $TextGrid $output
+
+
+ 		 # In the case that more than one speaker shows, the default response 
+		 # will be to extract from the first speaker
+
+		expect {
+			"Which speaker should be analyzed (number)?  " {
+				send -- "1\r"
+				expect "Name:\t\t\tspeaker\t"
+				send -- "${firstName} ${lastName}\r"
+				exp_continue
+			}
+			"Name:\t\t\t\t" {
+				send -- "${firstName} ${lastName}\r"
+			}
+		}
+
+		expect "First name:\t\t${firstName}\t" {
+			send -- "\r"
+		}
+		expect "Last name:\t\t${lastInitial}\t" {
+			send -- "\r"
+		}
+		expect "Sex:\t\t\t" {
+		send -- "${sex}\r"
+		}
+		expect "Age:\t\t\t" {
+		send -- "-\r"
+		}
+		expect "Ethnicity:\t\t" {
+			send -- "-\r"
+		}
+		expect "Location:\t\t" {
+			send -- "${location}\r"
+		}
+		expect "Year of recording:\t" {
+			send -- "-\r"
+		}
+		expect "Years of schooling:\t" {
+			send -- "-\r"
+			set timeout 10000
+			expect eof
+		}
+	} 
+
+
+	 # If formants weren't properly extracted, adds name to redo.txt
+
+	if {![file exists "${output}.txt"]} {
+		set redo [open "redo.txt" a]
+		puts $redo "${location}\t${lastName}\t${firstName}"
+		close $redo
+	}
+}
