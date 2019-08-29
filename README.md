@@ -1,4 +1,14 @@
-# FAVE toolkits
+# Alternative Batching Method for FAVE
+
+This branch allows you to queue speakers for extraction from aligned textgrid outputs. 
+
+  selectTierAndQueue.praat (in FAVE-align) modifies textgrid alignment outputs with multiple speakers to produce adjusted textgrids with tiers only associated with the desired speaker and adds these speakers to an extraction queue.
+  The addition of queue.exp (in FAVE-extract) allows you to introduce batch functionality similar to the [better-batch feature](https://github.com/JoFrhwld/FAVE/tree/feature/better-batch) to any version of FAVE-extract without having to introduce any  modifications in your original code.
+
+This branch includes praat and expect scripts, so make sure you have praat and expect installed before using it.
+
+----------------
+## FAVE toolkits
 
 This is a repository for the FAVE-Align and FAVE-extract toolkits.
 The first commit here represents the toolkit as it was available on the FAVE website as of October 21, 2013.
