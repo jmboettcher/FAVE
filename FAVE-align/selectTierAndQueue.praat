@@ -32,7 +32,7 @@
 
 form Get initial info
 	sentence inputTableName Status.txt
-	sentence endDirectory ../dump
+	sentence endDirectory ../FAVE-extract
 endform
 
 # Gets list of TextGrid files 
