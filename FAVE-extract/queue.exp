@@ -21,7 +21,8 @@ set timeout -1
 
 
  # Reads tab-separated file with list of queued speakers
- # and the following fields: firstName lastName sex location
+ # and the following fields: firstName lastName sex age 
+ # ethnicity location recordingYear educationYears
 
 set f [open "queue.txt"]
 set persons [split [read $f] "\n"]
@@ -41,7 +42,7 @@ close $redo
 
 foreach person $persons {
 	set info [split $person "\t"]
-	lassign $info firstName lastName sex location
+	lassign $info firstName lastName sex age ethnicity location recordingYear educationYears
 
 	set wav "${location}_${lastName}_${firstName}.wav"
 	set TextGrid "${location}_${lastName}_${firstName}.TextGrid"
@@ -77,22 +78,22 @@ foreach person $persons {
 			send -- "\r"
 		}
 		expect "Sex:\t\t\t" {
-		send -- "${sex}\r"
+			send -- "${sex}\r"
 		}
 		expect "Age:\t\t\t" {
-		send -- "-\r"
+			send -- "${age}\r"
 		}
 		expect "Ethnicity:\t\t" {
-			send -- "-\r"
+			send -- "${ethnicity}\r"
 		}
 		expect "Location:\t\t" {
 			send -- "${location}\r"
 		}
 		expect "Year of recording:\t" {
-			send -- "-\r"
+			send -- "${recordingYear}\r"
 		}
 		expect "Years of schooling:\t" {
-			send -- "-\r"
+			send -- "${educationYears}\r"
 			set timeout 10000
 			expect eof
 		}
