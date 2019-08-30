@@ -6,7 +6,7 @@
 ## 	and scans through their tiers to generate textgrids that only have
 ## 	the phone and word tiers corresponding to the speaker in the file name.
 ## 	The program assumes that files follow the following labeling format:
-##			Location_Firstname_Lastname.TextGrid
+##			LOCATION_FIRSTNAME_LASTNAME.TextGrid
 ## 		It also assumes that for each speaker, there are only phone and word 
 ## 	tiers. The program checks for the most common labeling methods in order to 
 ##	identify the target speaker: 
@@ -32,7 +32,7 @@
 
 form Get initial info
 	sentence inputTableName Status.txt
-	sentence endDirectory ../FAVE-extract
+	sentence endDirectory ../dump
 endform
 
 # Gets list of TextGrid files 
@@ -50,7 +50,7 @@ tableInfo = Read Table from tab-separated file: inputTable$
 
 #prepares queue file
 queue$ = endDirectory$ + "/queue.txt"
-header$ = "First	Last	Sex	Location"
+header$ = "First	Last	Sex	Age	Ethnicity	Location	Year of recording	Years of schooling"
 writeFileLine: queue$, header$
 
 # Loops through each TextGrid listed in the input directory.
@@ -195,21 +195,26 @@ procedure formQueue
 	numRows = Get number of rows
 	sex$ = "Please manually enter"
 	for row to numRows
-		firstCheck$ = Get value: row, "First"
-		lastCheck$ = Get value: row, "Last"
-		locationCheck$ = Get value: row, "Location"
+		firstCheck$ = Get value: row, "first"
+		lastCheck$ = Get value: row, "last"
+		locationCheck$ = Get value: row, "site"
 		if (firstCheck$ = parseInfo.firstName$ && lastCheck$ = parseInfo.lastName$ && locationCheck$ = parseInfo.location$)
-			search$ = Get value: row, "Sex"
+			search$ = Get value: row, "gender"
 			if (search$ = "M") | (search$ = "F")
 				sex$ = search$
 			endif
+			birthYear$ = Get value: row, "birthyear"
+			age$ = "birthyear: " + birthYear$
+			ethnicity$ = Get value: row, "race_ethnicity"
+			yearOfRecording$ = Get value: row, "recording_year"
+			yearsOfSchooling$ = Get value: row, "education_years"
 		endif
 	endfor
 	if sex$ = "Please manually enter"
 		appendInfoLine: inputTable$
 		appendInfoLine: "     " + parseInfo.firstName$ + " " + parseInfo.lastName$
 	endif
-	line$ = parseInfo.firstName$ + "	" + parseInfo.lastName$ + "	" + sex$ + "	" + parseInfo.location$
+	line$ = parseInfo.firstName$ + "	" + parseInfo.lastName$ + "	" + sex$ + "	" + age$ + "	" + ethnicity$ + "	" + parseInfo.location$ + "	" + yearOfRecording$ + "	" + yearsOfSchooling$
 	appendFileLine: queue$, line$ 
 endproc
 
@@ -245,14 +250,12 @@ procedure sortQueue
 	queue = Read Table from tab-separated file: queue$
 	selectObject: queue
 	Sort rows: "Sex"
-	firstrowa$ = Get value: 1, "First"
-	firstrowb$ = Get value: 1, "Last"
-	firstrowc$ = Get value: 1, "Sex"
-	firstrowd$ = Get value: 1, "Location"
-	Set column label (label): "First", firstrowa$
-	Set column label (label): "Last", firstrowb$
-	Set column label (label): "Sex", firstrowc$
-	Set column label (label): "Location", firstrowd$
+	numCols = Get number of columns
+	for col to numCols
+		colName$ = Get column label: col
+		firstRowText$ = Get value: 1, colName$
+		Set column label (label): colName$, firstRowText$
+	endfor
 	Remove row: 1
 	Save as tab-separated file: queue$
 endproc
