@@ -1,3 +1,44 @@
+# Running queued speakers
+
+The queue.exp script in this folder makes it easier to queue speakers to extract formants from by allowing you to preemptively provide demographic info. If you already have your own version of FAVE-extract downloaded, you may just download and add queue.exp to that folder, although you may need to make some alterations if your version prompts for different demographic info or if you'd like to change some of the configuration parameters. 
+
+# Queue Input
+In order to run queue.exp, you must have a tab-delimited file labeled queue.txt in the same folder containing the following fields, separated by tabs:
+
+    firstName     lastName     sex     age      ethnicity     location     recordingYear     educationYears
+
+You should format the document so it does not actually contain these headers in the first line but rather starts off with the demographic information, the program itself will assign headers. If you ran the selectTierAndQueue.praat program in FAVE-align, a queue of this format should have already been generated for you and saved to this folder.
+
+Queue.exp assumes that your input files follow the following formats:
+
+    location_lastName_firstName.wav
+
+    location_lastName_firstName.TextGrid
+
+# Queue Usage
+
+In the directory `FAVE-extract`, type:
+
+    ./queue.exp
+
+Make sure to make the script executable first:
+
+    chmod +x queue.exp
+
+# Queue Output
+
+Your output file with the formants will be named the following:
+
+    location_lastName_firstName_formants
+
+This program also is set to time out if it's something goes wrong with a particular speaker. Speakers that have been timed out are listed in a file labeled:
+
+    redo.txt
+
+
+
+-------------------------------------
+
 For more information on the installation and use of FAVE-extract, see the associated pages on the GitHub wiki:
 https://github.com/JoFrhwld/FAVE/wiki/FAVE-extract
 
