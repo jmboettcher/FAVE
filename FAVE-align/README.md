@@ -73,18 +73,31 @@ It also assumes that for each speaker, there are only phone and word tiers. The 
 			2) Then it looks at tiers whose names contain "speaker" or the 
 			   target's first or last name. 
 		These targets can be easily adjusted in the trackTiers procedure in the code, depending on possible naming conventions used for the target speaker in the textgrid. Because selectTierAndQueue.praat runs through many possible conventions, it's especially useful when your target speaker is not uniformly identified in the textgrids. The more uniform your naming conventions for the target speaker, the fewer labeling methods the program needs to track.
-        When two tiers corresponding to the speaker in the file name are not able to be identified, they're printed to the info window for manual discretion. In addition, successfully extracted files are listed with their tiers for double-checking
+        When two tiers corresponding to the speaker in the file name are not able to be identified, they're printed to the info window for manual discretion. In addition, successfully extracted files are listed with their tiers for double-checking.
+	The output textgrid is saved to a new directory, FAVE-extract (or whatever you assign as your end directory), with the same file name:
+
+	    LOCATION_Firstname_Lastname.TextGrid
 
 #### Creating a queue of said speakers
 
 selectTierAndQueue.praat adds all of the speakers referenced in the TextGrid file names to a queue for extraction. 
 		This portion assumes you have an input file containing demographic info for all speakers with at least columns for:
-			1) first name (labeled "First"), last name ("Last"), sex ("Sex"), and location ("Location")
+			1) first name (labeled "first"), last name ("last"), gender ("gender"), 
+			 location ("site"), birthyear ("birthyear"), ethnicity ("race_ethnicity"),
+ 			 year of recording ("recording_year"), and years of schooling ("education_years")
 The input file can be labeled whatever you want, you will be calling it when you run the program.
 
 Speakers that need manual discretion are printed in the info window.
 (Note: unless noted, speakers are added to table even if their accompanying textgrids need to be manually prepared)
 
+The output queue is saved to a new directory, FAVE-extract (or whatever you assign as your end directory), with the same file name:
+
+	queue.txt
+
 ### Usage
 
+In the directory `FAVE-align`, type:
+
     praat --run selectTierAndQueue.praat nameOfInputDemographicsFile.txt ../FAVE-extract
+
+You may also change "../FAVE-extract" to your chosen end directory.
