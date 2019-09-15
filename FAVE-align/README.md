@@ -72,7 +72,7 @@ It also assumes that for each speaker, there are only phone and word tiers. The 
 1) First it looks for tiers named solely as "speaker" or the target's full name. 
 2) Then it looks at tiers whose names contain "speaker" or the target's first or last name. 
 
-		These targets can be easily adjusted in the trackTiers procedure in the code, depending on possible naming conventions used for the target speaker in the textgrid. Because selectTierAndQueue.praat runs through many possible conventions, it's especially useful when your target speaker is not uniformly identified in the textgrids. The more uniform your naming conventions for the target speaker, the fewer labeling methods the program needs to track.
+	These targets can be easily adjusted in the trackTiers procedure in the code, depending on possible naming conventions used for the target speaker in the textgrid. Because selectTierAndQueue.praat runs through many possible conventions, it's especially useful when your target speaker is not uniformly identified in the textgrids. The more uniform your naming conventions for the target speaker, the fewer labeling methods the program needs to track.
         When two tiers corresponding to the speaker in the file name are not able to be identified, they're printed to the info window for manual discretion. In addition, successfully extracted files are listed with their tiers for double-checking.
 	The output textgrid is saved to a new directory, FAVE-extract (or whatever you assign as your end directory), with the same file name:
 
