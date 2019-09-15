@@ -94,6 +94,9 @@ foreach person $persons {
 		}
 		expect "Years of schooling:\t" {
 			send -- "${educationYears}\r"
+			
+			##if you expect your extractions to take longer than 10000, you may change this timeout value
+			
 			set timeout 10000
 			expect eof
 		}
