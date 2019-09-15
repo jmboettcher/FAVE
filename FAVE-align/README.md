@@ -82,9 +82,14 @@ It also assumes that for each speaker, there are only phone and word tiers. The 
 
 selectTierAndQueue.praat adds all of the speakers referenced in the TextGrid file names to a queue for extraction. 
 		This portion assumes you have an input file containing demographic info for all speakers with at least columns for:
-			1) first name (labeled "first"), last name ("last"), gender ("gender"), 
-			 location ("site"), birthyear ("birthyear"), ethnicity ("race_ethnicity"),
- 			 year of recording ("recording_year"), and years of schooling ("education_years")
+		* first name (labeled "first")
+		* last name ("last")
+		* gender ("gender") 
+		* location ("site")
+		* birthyear ("birthyear")
+		* ethnicity ("race_ethnicity")
+ 		* year of recording ("recording_year")
+		* years of schooling ("education_years")
 The input file can be labeled whatever you want, you will be calling it when you run the program.
 
 Speakers that need manual discretion are printed in the info window.
