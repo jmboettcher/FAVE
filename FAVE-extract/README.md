@@ -1,8 +1,8 @@
 # Running queued speakers
 
-The queue.exp script in this folder makes it easier to queue speakers to extract formants from by allowing you to preemptively provide demographic info. If you already have your own version of FAVE-extract downloaded, you may just download and add queue.exp to that folder, although you may need to make some alterations if your version prompts for different demographic info or if you'd like to change some of the configuration parameters. 
+The queue.exp script in this folder makes it easier to queue speakers to extract formants from by allowing you to preemptively provide demographic info. If you already have your own version of FAVE-extract downloaded, you may just download and add queue.exp to that folder, although you may need to make some alterations if your version prompts for different demographic info or if you'd like to change some of the configuration parameters. Run FAVE-extract without queue by following the general procedure under General Procedure below.
 
-# Queue Input
+## Queue Input
 In order to run queue.exp, you must have a tab-delimited file labeled queue.txt in the same folder containing the following fields, separated by tabs:
 
     firstName     lastName     sex     age      ethnicity     location     recordingYear     educationYears
@@ -17,7 +17,7 @@ Queue.exp assumes that your input files follow the following naming standard:
 
     location_lastName_firstName.TextGrid
 
-# Queue Usage
+## Queue Usage
 
 In the directory `FAVE-extract`, type:
 
@@ -27,7 +27,7 @@ Make sure to make the script executable first:
 
     chmod +x queue.exp
 
-# Queue Output
+## Queue Output
 
 Your output file with the formants will be named the following:
 
@@ -41,10 +41,12 @@ This program also is set to time out if it's something goes wrong with a particu
 
 -------------------------------------
 
+
+
 For more information on the installation and use of FAVE-extract, see the associated pages on the GitHub wiki:
 https://github.com/JoFrhwld/FAVE/wiki/FAVE-extract
 
-# Contents
+# General Procedure (without queue)
 
 I. [System Requirements](#i-system-requirements)
 
