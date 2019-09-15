@@ -181,7 +181,7 @@ procedure saveAdjustedFile
 		endwhile
 	newName$ = endDirectory$ + "/" + fileName$
 	if fileReadable: newName$
-		newName$ = endDirectory$ + "/" + "adjusted_" + fileName$
+		newName$ = endDirectory$ + "/" + fileName$
 	endif
 	Save as text file: newName$		
 	removeObject: currentTextgrid
