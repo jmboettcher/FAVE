@@ -7,9 +7,11 @@ In order to run queue.exp, you must have a tab-delimited file labeled queue.txt 
 
     firstName     lastName     sex     age      ethnicity     location     recordingYear     educationYears
 
-You should format the document so it does not actually contain these headers in the first line but rather starts off with the demographic information, the program itself will assign headers. If you ran the selectTierAndQueue.praat program in FAVE-align, a queue of this format should have already been generated for you and saved to this folder.
+IF YOU RAN THE selectTierAndQueue.praat program in FAVE-align, a queue of this format should have already been generated for you and saved to this folder.
 
-Queue.exp assumes that your input files follow the following formats:
+You should format the document so it does not actually contain these headers in the first line but rather starts off with the demographic information, the program itself will assign headers. 
+
+Queue.exp assumes that your input files follow the following naming standard:
 
     location_lastName_firstName.wav
 
