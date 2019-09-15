@@ -17,6 +17,8 @@ Queue.exp assumes that your input files follow the following naming standard:
 
     location_lastName_firstName.TextGrid
 
+Note: if you ran the selectTierAndQueue.praat program in FAVE-align, all of your textgrids should only hold one speaker. If this is not the case, queue.exp's default is to choose the first speaker in the textgrid for formant extraction.
+
 ## Queue Usage
 
 In the directory `FAVE-extract`, type:
