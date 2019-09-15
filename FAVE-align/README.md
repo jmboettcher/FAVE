@@ -41,7 +41,6 @@ All output is concatenated into a single Praat TextGrid file.
 each speaker (If no name is specified, it will be given same name as the sound
 file, plus ".TextGrid" extension.)
 
-
 ### Options:
 
 Short | Long | Description
@@ -53,3 +52,39 @@ Short | Long | Description
 `-v` | `--verbose` | Detailed output on status of dictionary check and alignment progress.
 `-d [filename]` | `--dict=[filename]` | Specifies the name of the file containing the pronunciation dictionary.  Default file is `/model/dict`.
 `-n` | `--noprompt` | User is not prompted for the transcription of words not in the dictionary, or truncated words.  Unknown words are ignored by the aligner.
+
+
+## Running selectTierAndQueue.praat
+
+### Description, inputs, and outputs
+This branch introduces a selectTierAndQueue.praat functionality which accomplishes two tasks: 1) selecting for one speaker per textgrid and 2) creating a queue of said speakers
+
+#### Selecting for one speaker per textgrid
+
+selectTierAndQueue.praat takes all of your textgrid files in a certain directory and scans through their tiers to generate textgrids that only have the phone and word tiers corresponding to the speaker in the file name.
+
+The program assumes that files follow the following labeling format:
+
+    LOCATION_Firstname_Lastname.TextGrid
+    
+It also assumes that for each speaker, there are only phone and word tiers. The program checks for the most common labeling methods in order to identify the target speaker: 
+			1) First it looks for tiers named solely as "speaker" or the target's 
+ 			   full name. 
+			2) Then it looks at tiers whose names contain "speaker" or the 
+			   target's first or last name. 
+		These targets can be easily adjusted in the trackTiers procedure in the code, depending on possible naming conventions used for the target speaker in the textgrid. Because selectTierAndQueue.praat runs through many possible conventions, it's especially useful when your target speaker is not uniformly identified in the textgrids. The more uniform your naming conventions for the target speaker, the fewer labeling methods the program needs to track.
+        When two tiers corresponding to the speaker in the file name are not able to be identified, they're printed to the info window for manual discretion. In addition, successfully extracted files are listed with their tiers for double-checking
+
+#### Creating a queue of said speakers
+
+selectTierAndQueue.praat adds all of the speakers referenced in the TextGrid file names to a queue for extraction. 
+		This portion assumes you have an input file containing demographic info for all speakers with at least columns for:
+			1) first name (labeled "First"), last name ("Last"), sex ("Sex"), and location ("Location")
+The input file can be labeled whatever you want, you will be calling it when you run the program.
+
+Speakers that need manual discretion are printed in the info window.
+(Note: unless noted, speakers are added to table even if their accompanying textgrids need to be manually prepared)
+
+### Usage
+
+    praat --run selectTierAndQueue.praat nameOfInputDemographicsFile.txt ../FAVE-extract
