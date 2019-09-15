@@ -23,7 +23,9 @@
 ##	to a queue for extraction. 
 ##		This portion assumes an input file containing demographic info for all 
 ##	speakers, with at least columns for:
-##			1) first name (labeled "First"), last name ("Last"), sex ("Sex"), and location ("Location").
+##			1) first name (labeled "first"), last name ("last"), gender ("gender"), 
+##			 location ("site"), birthyear ("birthyear"), ethnicity ("race_ethnicity"),
+## 			 year of recording ("recording_year"), and years of schooling ("education_years")
 ##	Speakers that need manual discretion are printed in the info window.
 ##	(Note: unless noted, speakers are added to table even if their accompanying 
 ##	textgrids need to be manually prepared)
