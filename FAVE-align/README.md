@@ -2,6 +2,7 @@
 
 For more information on the installation and use of FAVE-align, see the associated GitHub wiki pages: 
 https://github.com/JoFrhwld/FAVE/wiki/FAVE-align
+To use alternative batching, see "Running selectTierAndQueue.praat"
 
 ## Installation
 
@@ -54,7 +55,7 @@ Short | Long | Description
 `-n` | `--noprompt` | User is not prompted for the transcription of words not in the dictionary, or truncated words.  Unknown words are ignored by the aligner.
 
 
-## Running selectTierAndQueue.praat
+## Running selectTierAndQueue.praat 
 
 ### Description, inputs, and outputs
 This branch introduces a selectTierAndQueue.praat functionality which accomplishes two tasks: 1) selecting for one speaker per textgrid and 2) creating a queue of said speakers
