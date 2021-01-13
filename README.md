@@ -8,6 +8,8 @@ This branch allows you to queue speakers for extraction from aligned textgrid ou
 
 This branch includes praat and expect scripts, so make sure you have praat and expect installed before using it.
 
+Readme's include all documentation from the original JoFrhwld/FAVE repository, as well as additional documentation outlining steps to take to further automate the alignment and extraction processes in batches.
+
 ----------------
 ## FAVE toolkits
 
